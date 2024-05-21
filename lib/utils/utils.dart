@@ -5,29 +5,29 @@ import 'package:uuid/uuid.dart';
 import '../bloc/task_bloc/task_bloc.dart';
 import '../models/task.dart';
 
-
+// Pop виджеты для удаления и добавления задачи
 void addTaskDialog(BuildContext context) {
-  final _controller = TextEditingController();
+  final controller = TextEditingController();
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Add Task'),
+        title: const Text('Добавить задачу'),
         content: TextField(
-          controller: _controller,
-          decoration: InputDecoration(hintText: 'Enter task description'),
+          controller: controller,
+          decoration: const InputDecoration(hintText: 'Введите описание'),
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('Cancel'),
+            child: const Text('Назад'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('Add'),
+            child: const Text('Добавить'),
             onPressed: () {
-              final task = Task(id: Uuid().v4(), description: _controller.text);
+              final task = Task(id: Uuid().v4(), description: controller.text);
               context.read<TaskBloc>().add(AddTask(task));
               Navigator.of(context).pop();
             },
@@ -43,17 +43,17 @@ void showDeleteConfirmationDialog(BuildContext context, Task task) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Delete Task'),
-        content: Text('Are you sure you want to delete this task?'),
+        title: const Text('Удалить задачу'),
+        content: const Text('Действительно хотите удалить задачу?'),
         actions: <Widget>[
           TextButton(
-            child: Text('Cancel'),
+            child: const Text('Назад'),
             onPressed: () {
               Navigator.of(context).pop();
             },
           ),
           TextButton(
-            child: Text('Delete'),
+            child: const Text('Удалить'),
             onPressed: () {
               context.read<TaskBloc>().add(DeleteTask(task));
               Navigator.of(context).pop();

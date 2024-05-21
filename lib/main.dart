@@ -8,12 +8,17 @@ import 'bloc/task_bloc/task_bloc.dart';
 import 'ui/task_screen.dart';
 
 void main() async {
+  // Обеспечивает инициализацию всех необходимых компонентов Flutter.
   WidgetsFlutterBinding.ensureInitialized();
+  // Асинхронно инициализирует локальное хранилище для HydratedBloc, используя путь к директории документов приложения.
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+  // Запускает приложение в контексте, где доступно инициализированное хранилище.
   HydratedBlocOverrides.runZoned(
+    // Запуск приложения.
         () => runApp(const MyApp()),
+    // Установка инициализированного хранилища.
     storage: storage,
   );
 }
@@ -24,6 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      // Создание экземпляра TaskBloc, который будет доступен всем потомкам через контекст.
       create: (context) => TaskBloc(),
       child: MaterialApp(
         title: 'ToDo List',

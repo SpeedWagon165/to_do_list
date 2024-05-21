@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import '../../models/task.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,14 +22,14 @@ class TaskBloc extends HydratedBloc<TaskEvent, TaskState> {
     final updatedTasks = List<Task>.from(state.tasks)..add(event.task);
     emit(TaskState(tasks: updatedTasks));
   }
-  //
+  // Выполнена или нет
   void _onUpdateTask(UpdateTask event, Emitter<TaskState> emit) {
     final updatedTasks = state.tasks.map((task) {
       return task.id == event.task.id ? event.task : task;
     }).toList();
     emit(TaskState(tasks: updatedTasks));
   }
-
+  // Удаление задачи
   void _onDeleteTask(DeleteTask event, Emitter<TaskState> emit) {
     final updatedTasks = state.tasks.where((task) => task.id != event.task.id).toList();
     emit(TaskState(tasks: updatedTasks));
