@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/task_bloc/task_bloc.dart';
 import '../utils/utils.dart';
 
-class TaskScreen extends StatelessWidget {
+class TaskScreen extends StatelessWidget {      //Можно было использовать виджеты типо kanban_board и т.д но так интереснее
   const TaskScreen({super.key});
 
   @override
